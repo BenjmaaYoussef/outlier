@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<style>
+  :root { --ink:#14161b; --muted:#7b8190; --line:#e2e4e9; --hot:#f0246c; --warm:#b86a00; --ok:#178a52; }
+  * { box-sizing: border-box; }
+  body { width: 300px; margin: 0; padding: 16px; font: 14px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--ink); }
+  header { display: flex; align-items: baseline; gap: 6px; }
+  .x { color: var(--hot); font-weight: 900; font-size: 22px; line-height: 1; }
+  h1 { margin: 0; font-size: 17px; }
+  .status { margin-left: auto; display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+  .status i { width: 7px; height: 7px; border-radius: 50%; background: #c3c7cf; }
+  .status.on i { background: var(--ok); }
+  .count { margin: 18px 0 4px; display: flex; align-items: baseline; gap: 8px; }
+  .count b { font-size: 44px; font-weight: 800; letter-spacing: -0.04em; line-height: .9; font-variant-numeric: tabular-nums; }
+  .count span { color: var(--muted); }
+  .bar { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+  .bar i { display: block; height: 100%; background: var(--ink); transition: width .3s; }
+  .hint { color: var(--muted); font-size: 12.5px; margin: 10px 0 14px; }
+  button { font: inherit; cursor: pointer; border: 0; border-radius: 999px; padding: 10px 14px; width: 100%; font-weight: 600; }
+  #toggle { background: var(--hot); color: #fff; }
+  #toggle.stop { background: var(--ink); }
+  .row { display: flex; gap: 8px; margin-top: 8px; }
+  .ghost { background: #f1f2f4; color: var(--ink); font-weight: 500; }
+  label.switch { display: flex; align-items: flex-start; gap: 10px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); cursor: pointer; }
+  label.switch input { margin-top: 3px; accent-color: var(--hot); }
+  .warn { color: var(--warm); font-size: 12px; margin-top: 2px; }
+  .source { display: flex; margin: 14px 0 0; padding: 3px; border-radius: 999px; background: #f1f2f4; }
+  .source button { width: 50%; padding: 7px 0; font-weight: 500; background: transparent; color: #4b5160; }
+  .source button[aria-checked="true"] { background: #fff; color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,.12); font-weight: 600; }
+  .err { color: #c62a2a; font-size: 12.5px; margin-top: 10px; display: none; }
+</style>
+</head>
+<body>
+  <header>
+    <span class="x">×</span><h1>Outlier</h1>
+    <span class="status" id="status"><i></i><span>Checking app…</span></span>
+  </header>
+
+  <div class="source" role="radiogroup" aria-label="Where to capture from">
+    <button role="radio" data-source="home" aria-checked="true">Home feed</button>
+    <button role="radio" data-source="reels" aria-checked="false">Reels</button>
+  </div>
+
+  <div class="count"><b id="n">0</b><span id="of">of 10 posts captured</span></div>
+  <div class="bar"><i id="bar" style="width:0"></i></div>
+  <p class="hint" id="hint">Open your Instagram home feed, press Start, then scroll. Each post you stop on is saved.</p>
+
+  <button id="toggle">Start capture</button>
+  <div class="row">
+    <button class="ghost" id="open">Open Outlier</button>
+    <button class="ghost" id="reset">Reset count</button>
+  </div>
+
+  <label class="switch">
+    <input type="checkbox" id="auto" />
+    <span>
+      Auto-scroll for me
+      <div class="warn" id="autoNote">Riskier: automated scrolling can get the account flagged. Use a spare account.</div>
+    </span>
+  </label>
+
+  <p class="err" id="err"></p>
+  <script src="popup.js"></script>
+</body>
+</html>

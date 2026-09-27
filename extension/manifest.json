@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "Outlier: feed capture",
+  "version": "0.3.2",
+  "description": "Saves the Instagram posts you scroll past to your local Outlier app.",
+  "permissions": [
+    "storage",
+    "debugger"
+  ],
+  "host_permissions": [
+    "http://localhost:3000/*",
+    "http://127.0.0.1:3000/*",
+    "https://www.instagram.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Outlier",
+    "default_icon": {
+      "32": "icons/32.png",
+      "128": "icons/128.png"
+    }
+  },
+  "icons": {
+    "32": "icons/32.png",
+    "128": "icons/128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.instagram.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "name": "outlier",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack --port 3000",
+    "build": "next build --turbopack",
+    "start": "next start",
+    "lint": "eslint",
+    "outlier": "NODE_NO_WARNINGS=1 tsx --env-file-if-exists=.env.local cli/outlier.ts",
+    "demo": "NODE_NO_WARNINGS=1 tsx scripts/demo.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.48.0",
+    "next": "15.5.26",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "sonner": "^2.0.8"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^22.20.4",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.26",
+    "tailwindcss": "^4",
+    "tsx": "^4.23.15",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=22.13"
+  },
+  "packageManager": "pnpm@10.30.2",
+  "description": "Capture outlier Instagram posts, break them into hooks, and write ads from them with MarioBot."
+}

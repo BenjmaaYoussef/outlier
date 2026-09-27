@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg: #e9ebee;
+  --surface: #ffffff;
+  --surface-2: #f4f5f7;
+  --ink: #14161b;
+  --ink-2: #4b5160;
+  --muted: #7b8190;
+  --line: #d9dce2;
+  --heat-cold: #8b93a3;
+  --heat-warm: #e8890c;
+  --heat-hot: #f0246c;
+  --ok: #178a52;
+  --danger: #c62a2a;
+  --focus: #2f5bea;
+}
+
+.dark {
+  --bg: #0d0f13;
+  --surface: #161920;
+  --surface-2: #1d2029;
+  --ink: #eef0f4;
+  --ink-2: #b4b9c5;
+  --muted: #818796;
+  --line: #2a2e38;
+  --heat-cold: #7a8293;
+  --heat-warm: #f59e1b;
+  --heat-hot: #ff4d8a;
+  --ok: #3ccb86;
+  --danger: #ff6363;
+  --focus: #7c9cff;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-cold: var(--heat-cold);
+  --color-warm: var(--heat-warm);
+  --color-hot: var(--heat-hot);
+  --color-ok: var(--ok);
+  --color-danger: var(--danger);
+  --color-focus: var(--focus);
+  --font-sans: var(--ff-body);
+  --font-display: var(--ff-display);
+}
+
+html { background: var(--bg); }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--ff-body), system-ui, sans-serif;
+  font-feature-settings: "ss01", "cv11";
+}
+
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 6px; }
+
+.tabular { font-variant-numeric: tabular-nums; }
+
+/* The outlier numeral: the one loud element on the page. */
+.multiplier {
+  font-family: var(--ff-display), sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.85;
+  font-variation-settings: "wdth" 85;
+}
+
+/* Streaming output */
+.prose-out { line-height: 1.6; font-size: 15px; }
+.prose-out h1, .prose-out h2, .prose-out h3 { font-family: var(--ff-display), sans-serif; font-weight: 700; margin: 1.2em 0 .4em; line-height: 1.2; }
+.prose-out h1 { font-size: 1.25rem; } .prose-out h2 { font-size: 1.1rem; } .prose-out h3 { font-size: 1rem; }
+.prose-out p { margin: .6em 0; }
+.prose-out ul, .prose-out ol { margin: .6em 0; padding-left: 1.3em; }
+.prose-out ul { list-style: disc; } .prose-out ol { list-style: decimal; }
+.prose-out li { margin: .25em 0; }
+.prose-out hr { border-color: var(--line); margin: 1.2em 0; }
+.prose-out strong { font-weight: 650; }
+.prose-out blockquote { border-left: 3px solid var(--line); padding-left: .8em; color: var(--ink-2); }
+
+.caret::after {
+  content: "";
+  display: inline-block;
+  width: .5em; height: 1.05em;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  background: var(--heat-hot);
+  animation: blink 1s steps(2) infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+@keyframes arrive { from { opacity: 0; transform: translateY(8px) scale(.98); } to { opacity: 1; transform: none; } }
+.arrive { animation: arrive .45s cubic-bezier(.2,.8,.2,1) both; }
+
+@keyframes shimmer { from { background-position: -200% 0; } to { background-position: 200% 0; } }
+.shimmer {
+  background: linear-gradient(90deg, var(--surface-2) 25%, var(--line) 50%, var(--surface-2) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arrive, .shimmer, .caret::after { animation: none; }
+}
